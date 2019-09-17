@@ -2,6 +2,12 @@
 #-*- coding: utf-8 -*-
 
 """
+Package: AESynop
+Versión: 0.0.1
+
+Developer: Diego Garro Molina
+e-mail: diego.garromolina@ucr.ac.cr
+
 AESynop en su versión 0.0.1 es un proyecto para la evaluación de los reportes sinópticos
 emitidos por las estaciones meteorológicas terrestres.
 
