@@ -12,6 +12,8 @@ from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
 import requests
 
+log = open("log.txt", "w")
+
 def fecha_para_registro():
     """
     Esta función retorna la fecha a la cual es ejecutada.
@@ -56,3 +58,33 @@ def fecha_para_synops():
     lista.append(hoy.hour)
     lista.append(hoy.minute)
     return lista
+
+def scraping_synops(url, log_file):
+    """
+    Esta función scrapea la página de Ogimet.com para obtener los últimos sinópticos
+    emitidos por las estaciones terrestres.
+    -----------------------
+    Recibe dos paŕametros:
+    * url: un objeto de tipo string, la url de la página para extraer los sinópticos.
+    -----------------------
+    Retorna el METAR más actual como una cadena de texto si logra conectar a la url,
+    si no, retorna una cadena vacía
+    """
+    f = open("texto_web.txt", 'w')
+    req = requests.get(url)
+    statusCode = req.status_code
+    fecha = fecha_para_registro()
+    if statusCode == 200:
+        mensaje = "{}... Se accede correctamente a la página de Ogimet.com."
+        log.write(mensaje + '\n')
+        html = BeautifulSoup(req.text, "html.parser")
+        entrada = html.find('pre')
+        f.write(str(entrada))
+    else:
+        mensaje = "{}... No se pudo acceder a la pádina de Ogimet.com.".format(fecha)
+        print(mensaje)
+        log.write(mensaje + '\n')
+        return ''
+    f.close()
+
+log.close()
