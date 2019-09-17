@@ -26,20 +26,19 @@ def fecha_para_registro():
     hoy = datetime.utcnow()
     return(datetime.strftime(hoy, '%Y/%m/%d %H:%M:%S'))
 
-def registro_de_actividad(log_file, mensaje):
+def registro_de_actividad(mensaje):
     """
     Esta función registra la actividad realizada justo antes de ser ejecutada y
     la almacena en el archivo log.txt
     ---------------------------------
-    Recibe dos parámetros:
-    * log_file: un objeto de tipo file, es el archivo log para escribir la actividad.
+    Recibe un parámetro:
     * mensaje: un objeto de tipo string, el mensaje que se escribirá en log.txt
     ---------------------------------
     No retorna ningún valor.
     """
     fecha = fecha_para_registro()
     print(mensaje.format(fecha))
-    log_file.write(mensaje)
+    log.write(mensaje + '\n')
 
 def fecha_para_synops():
     """
@@ -59,12 +58,12 @@ def fecha_para_synops():
     lista.append(hoy.minute)
     return lista
 
-def scraping_synops(url, log_file):
+def scraping_synops(url):
     """
     Esta función scrapea la página de Ogimet.com para obtener los últimos sinópticos
     emitidos por las estaciones terrestres.
     -----------------------
-    Recibe dos paŕametros:
+    Recibe un paŕametro:
     * url: un objeto de tipo string, la url de la página para extraer los sinópticos.
     -----------------------
     Retorna el METAR más actual como una cadena de texto si logra conectar a la url,
