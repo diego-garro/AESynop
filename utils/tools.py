@@ -10,6 +10,7 @@ Este es un módulo para las herramientas que se necesitarán en el programa prin
 
 from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
+import requests
 
 def fecha_para_registro():
     """
@@ -37,3 +38,21 @@ def registro_de_actividad(log_file, mensaje):
     fecha = fecha_para_registro()
     print(mensaje.format(fecha))
     log_file.write(mensaje)
+
+def fecha_para_metar():
+    """
+    Esta función retorna la fecha en una lista para la extracción del metar
+    más reciente desde la web.
+    -----------------------
+    No recibe parámetros
+    -----------------------
+    Retorna una lista con año, mes, dia, hora y minuto actuales
+    """
+    lista = []
+    hoy = datetime.utcnow()
+    lista.append(hoy.year)
+    lista.append(hoy.month)
+    lista.append(hoy.day)
+    lista.append(hoy.hour)
+    lista.append(hoy.minute)
+    return lista
