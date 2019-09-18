@@ -49,14 +49,11 @@ def fecha_para_synops():
     -----------------------
     Retorna una lista con año, mes, dia, hora y minuto actuales
     """
-    lista = []
     hoy = datetime.utcnow()
-    lista.append(hoy.year)
-    lista.append(hoy.month)
-    lista.append(hoy.day)
-    lista.append(hoy.hour)
-    lista.append(hoy.minute)
-    return lista
+    hoy_6h = hoy - timedelta(hours=6)
+    tupla_hoy = (hoy.year, hoy.month, hoy.day, hoy.hour, hoy.minute)
+    tupla_hoy_6h = (hoy_6h.year, hoy_6h.month, hoy_6h.day, hoy_6h.hour, hoy_6h.minute)
+    return(tupla_hoy, tupla_hoy_6h)
 
 def scraping_synops(url):
     """
