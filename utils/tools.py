@@ -12,8 +12,6 @@ from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
 import requests
 
-log = open("log.txt", "w")
-
 def fecha_para_registro():
     """
     Esta función retorna la fecha a la cual es ejecutada.
@@ -36,9 +34,11 @@ def registro_de_actividad(mensaje):
     ---------------------------------
     No retorna ningún valor.
     """
+    log = open("log.txt", "a")
     fecha = fecha_para_registro()
     print(mensaje.format(fecha))
-    log.write(mensaje + '\n')
+    log.write(mensaje.format(fecha) + '\n')
+    log.close()
 
 def fecha_para_synops():
     """
@@ -79,7 +79,5 @@ def scraping_synops(url):
     else:
         mensaje = "{}... No se pudo acceder a la pádina de Ogimet.com."
         registro_de_actividad(mensaje)
-        return ''
+        #return ''
     f.close()
-
-log.close()
