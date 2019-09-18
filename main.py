@@ -16,8 +16,12 @@ cometidos por el personal de cada estación y que se aprenda de ellos.
 """
 
 from datetime import datetime, timedelta
+from utils import tools as tl
 
-hoy = datetime.utcnow()
+hoy, hoy_6h = tl.fecha_para_synops()
 
-url_es = 'http://ogimet.com/display_synops2.php?lugar=78764+78762+78774+78767&tipo=ALL&ord=DIR&nil=SI&fmt=txt&ano=%s&mes=%s&day=%s&hora=%s&anof=%s&mesf=%s&dayf=%s&horaf=%s&enviar=Ver'
-url_en = 'https://www.ogimet.com/display_synops2.php?lang=en&lugar=78764+78762+78774+78767&tipo=ALL&ord=DIR&nil=SI&fmt=txt&ano=%s&mes=%s&day=%s&hora=%s&anof=%s&mesf=%s&dayf=%s&horaf=%s&send=send'
+URL_ES = 'http://ogimet.com/display_synops2.php?lugar=78764+78762+78774+78767&tipo=ALL&ord=DIR&nil=SI&fmt=txt&ano={}&mes={}&day={}&hora={}&anof={}&mesf={}&dayf={}&horaf={}&enviar=Ver'
+URL_EN = 'https://www.ogimet.com/display_synops2.php?lang=en&lugar=78764+78762+78774+78767&tipo=ALL&ord=DIR&nil=SI&fmt=txt&ano={}&mes={}&day={}&hora={}&anof={}&mesf={}&dayf={}s&horaf={}&send=send'
+
+url = URL_ES.format(hoy_6h[0], str(hoy_6h[1]).zfill(2), str(hoy_6h[2]).zfill(2), str(hoy_6h[3]).zfill(2), hoy[0], str(hoy[1]).zfill(2), str(hoy[2]).zfill(2), str(hoy[3]).zfill(2))
+print(url)

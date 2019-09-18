@@ -42,7 +42,7 @@ def registro_de_actividad(mensaje):
 
 def fecha_para_synops():
     """
-    Esta función retorna la fecha en una lista para la extracción de los sinópticos
+    Esta función retorna la fecha en una tupla para la extracción de los sinópticos
     más recientes desde la web.
     -----------------------
     No recibe parámetros
