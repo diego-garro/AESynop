@@ -18,7 +18,8 @@ cometidos por el personal de cada estación y que se aprenda de ellos.
 from datetime import datetime, timedelta
 from utils import tools as tl
 
-log = open("texto_web.txt", "w")
+log = open("log.txt", "w")
+log.write("")
 log.close()
 
 hoy, hoy_6h = tl.fecha_para_synops()
