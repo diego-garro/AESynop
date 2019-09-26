@@ -24,13 +24,14 @@ def fecha_para_registro():
     hoy = datetime.utcnow()
     return(datetime.strftime(hoy, '%Y/%m/%d %H:%M:%S'))
 
-def registro_de_actividad(mensaje):
+def registro_de_actividad(mensaje, log):
     """
     Esta función registra la actividad realizada justo antes de ser ejecutada y
     la almacena en el archivo log.txt
     ---------------------------------
-    Recibe un parámetro:
-    * mensaje: un objeto de tipo string, el mensaje que se escribirá en log.txt
+    Recibe dos parámetros:
+    * mensaje: un objeto de tipo string, el mensaje que se escribirá en log.txt.
+    * log: file, archivo log donde se escribirán todos los registros de acividad.
     ---------------------------------
     No retorna ningún valor.
     """
