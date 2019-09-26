@@ -20,7 +20,6 @@ from utils import tools as tl
 
 log = open("log.txt", "w")
 log.write("")
-log.close()
 
 hoy, hoy_6h = tl.fecha_para_synops()
 
@@ -30,4 +29,10 @@ URL_EN = 'https://www.ogimet.com/display_synops2.php?lang=en&lugar=78764+78762+7
 url = URL_ES.format(hoy_6h[0], str(hoy_6h[1]).zfill(2), str(hoy_6h[2]).zfill(2), str(hoy_6h[3]).zfill(2), hoy[0], str(hoy[1]).zfill(2), str(hoy[2]).zfill(2), str(hoy[3]).zfill(2))
 print(url)
 
-tl.scraping_synops(url)
+#tl.scraping_synops(url, log)
+
+sinopticos = tl.extraer_synops("texto_web.txt", 78774)
+for s in sinopticos:
+    print(s)
+
+log.close()

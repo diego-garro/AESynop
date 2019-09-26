@@ -11,6 +11,7 @@ Este es un módulo para las herramientas que se necesitarán en el programa prin
 from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
 import requests
+import re
 
 def fecha_para_registro():
     """
@@ -56,13 +57,14 @@ def fecha_para_synops():
     tupla_hoy_6h = (hoy_6h.year, hoy_6h.month, hoy_6h.day, hoy_6h.hour, hoy_6h.minute)
     return(tupla_hoy, tupla_hoy_6h)
 
-def scraping_synops(url):
+def scraping_synops(url, log):
     """
     Esta función scrapea la página de Ogimet.com para obtener los últimos sinópticos
     emitidos por las estaciones terrestres.
     -----------------------
-    Recibe un paŕametro:
+    Recibe dos paŕametros:
     * url: un objeto de tipo string, la url de la página para extraer los sinópticos.
+    * log: file, archivo log donde se escribirán todos los registros de acividad.
     -----------------------
     Retorna el METAR más actual como una cadena de texto si logra conectar a la url,
     si no, retorna una cadena vacía
@@ -73,12 +75,39 @@ def scraping_synops(url):
     fecha = fecha_para_registro()
     if statusCode == 200:
         mensaje = "{}... Se accede correctamente a la página de Ogimet.com."
-        registro_de_actividad(mensaje)
+        registro_de_actividad(mensaje, log)
         html = BeautifulSoup(req.text, "html.parser")
         entrada = html.find('pre')
         f.write(str(entrada))
     else:
         mensaje = "{}... No se pudo acceder a la pádina de Ogimet.com."
-        registro_de_actividad(mensaje)
+        registro_de_actividad(mensaje, log)
         #return ''
     f.close()
+
+def almacenar_synops(fichero):
+    lista = []
+    synop = ''
+    for linea in fichero:
+        if linea == '\n' or re.search(r'#+', linea):
+            break
+        if re.search(r'\d{12}', linea):
+            synop = ''
+            synop = linea.replace('\n', '')
+        elif re.search(r'=\n', linea):
+            synop += re.sub(r'\s+', ' ', linea)
+            lista.append(re.sub(r'\s{2,}', ' ', synop))
+        else:
+            synop += re.sub(r'\s+', ' ', linea)
+    return lista
+
+def extraer_synops(file_name, oaci_code):
+    formato = r'SYNOPS\sde\s{}'.format(oaci_code)
+    f = open(file_name, 'r')
+    for linea in f:
+        #acierto = re.search(formato, linea)
+        if re.search(formato, linea):
+            f.readline()
+            break
+    return almacenar_synops(f)
+    
