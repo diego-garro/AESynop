@@ -86,6 +86,15 @@ def scraping_synops(url, log):
     f.close()
 
 def almacenar_synops(fichero):
+    """
+    Esta función toma los reportes sinópticos almacenados en un fichero de texto
+    y los acomoda en un string de una sola linea, luego los guarda en una lista.
+    ---------------------------
+    Recibe un parámetro:
+    * fichero: file, el archivo de texto que contiene los reportes sinópticos.
+    ---------------------------
+    Retorna la lista con los sinópticos colectados.
+    """
     lista = []
     synop = ''
     for linea in fichero:
@@ -102,6 +111,18 @@ def almacenar_synops(fichero):
     return lista
 
 def extraer_synops(file_name, oaci_code):
+    """
+    Esta función encuentra la estación deseada para sacar los sinópticos dentro de un
+    archivo de texto plano. Ejecuta la función almacenar_synops() para extraer los
+    reportes.
+    ----------------------------
+    Recibe dos parámetros:
+    * file_name: string, el nombre del archivo donde se encuentran los reportes sinópticos.
+    * oaci_code: int, el código OACI de la estación a escanear.
+    ----------------------------
+    Retorna la lista de los reportes sinópticos como una lista, tal como lo retorna la
+    función almacenar_synops().
+    """
     formato = r'SYNOPS\sde\s{}'.format(oaci_code)
     f = open(file_name, 'r')
     for linea in f:
