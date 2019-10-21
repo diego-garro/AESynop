@@ -105,7 +105,7 @@ The reports contain diferent formats of groups, every format is described follow
 #### Section 2:
 * 70HwaHwaHwa
 
-### ABCCD:
+### 9. ABCCD:
 
 **Parameters:** group (string), file_error="" (string), synop_type="main" (string)
 
