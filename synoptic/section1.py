@@ -25,6 +25,7 @@ __email__ = "dgarro@imn.ac.cr"
 __status__ = "Developer"
 
 from .group import Type_ABCDD
+from .tables.tables_section1 import TABLE_1819
 
 class Group_iRixhVV(Type_ABCDD):
 
@@ -49,18 +50,22 @@ class Group_iRixhVV(Type_ABCDD):
         self.h = self.C
         self.VV = self.DD
     
-	def evaluate_iR(self):
-		if self.iR.isdigit():
-			self.iR = int(self.iR)
-			if self.synop_type == 'no main':
-				if self.iR == 0 or self.iR == 1:
-					print(self.errors[11])
-					self.f.write(self.errors[11] + '\n')
-			try:
-				print("Precipitation preceding the observation:",self.table_1819[self.iR])
-			except KeyError:
-				print(self.errors[2])
-				self.f.write(self.errors[2] + '\n')
-		else:
-			print(self.errors[1])
-			sefl.f.write(self.errors[1] + '\n')
+    def evaluate_iR(self):
+        if self.iR.isdigit():
+            self.iR = int(self.iR)
+            if self.synop_type == 'no main':
+                if self.iR == 0 or self.iR == 1:
+                    print(self.errors[11])
+                    self.f.write(self.errors[11] + '\n')
+            try:
+                print("Precipitation preceding the observation:",TABLE_1819[self.iR])
+            except KeyError:
+                print(self.errors[2])
+                self.f.write(self.errors[2] + '\n')
+        else:
+            print(self.errors[1])
+            self.f.write(self.errors[1] + '\n')
+    
+    def evaluate_group(self):
+        if self.group_length == '=5':
+            self.evaluate_iR()

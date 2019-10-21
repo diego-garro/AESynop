@@ -17,6 +17,7 @@ cometidos por el personal de cada estación y que se aprenda de ellos.
 
 from datetime import datetime, timedelta
 from utils import tools as tl
+from synoptic.section1 import Group_iRixhVV
 
 log = open("log.txt", "w")
 log.write("")
@@ -34,5 +35,8 @@ print(url)
 sinopticos = tl.extraer_synops("texto_web.txt", 78774)
 for s in sinopticos:
     print(s)
+    lista = s.split(' ')
+    group_iRixhVV = Group_iRixhVV(lista[4], log)
+    group_iRixhVV.evaluate_group()
 
 log.close()

@@ -79,17 +79,17 @@ class Type_ABCDD(Group):
         self.C = self.extract_indicator(2, 3)
         self.DD = self.extract_indicator(3, 5)
 
-	def evaluate_identifier(self, comparator, err_key):
-		if self.A.isdigit():
-			self.A = int(self.A)
-			if self.A == comparator:
-				self.group_id = True
-			else:
-				self.group_id = False
-		else:
-			print(self.errors[err_key])
-			self.f.write(self.errors[err_key] + '\n')
-			self.group_id = True
+    def evaluate_identifier(self, comparator, err_key):
+        if self.A.isdigit():
+            self.A = int(self.A)
+            if self.A == comparator:
+                self.group_id = True
+            else:
+                self.group_id = False
+        else:
+            print(self.errors[err_key])
+            self.f.write(self.errors[err_key] + '\n')
+            self.group_id = True
 
     def evaluate_group(self):
         pass
