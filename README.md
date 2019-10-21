@@ -86,7 +86,7 @@ The reports contain diferent formats of groups, every format is described follow
 #### Section 1:
 * 7wwW1W2
 
-#### 7. ABCDE:
+### 7. ABCDE:
 
 **Parameters:** group (string), file_error="" (string), synop_type="main" (string)
 
