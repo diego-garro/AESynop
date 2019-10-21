@@ -13,6 +13,9 @@ Modo: from .group import Group
 """
 
 class Group(object):
+    """
+    Clase que defina la base de un grupo perteneciente a cualquier reporte sinóptico.
+    """
 
     def __init__(self, group, group_name=''):
         self.group = group
