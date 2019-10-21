@@ -4,8 +4,7 @@ This is a module for evaluating of synoptic reports from meteorological land sta
 
 ## Installation
 
-...
-
+Only run this command in terminal or CMD: `pip install synoptic`
 
 ## Group types clases
 
