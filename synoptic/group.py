@@ -68,16 +68,28 @@ class Type_ABCDD(Group):
 
     def __init__(self, group, file_error='', synop_type='main'):
         Group.__init__(self, group)
-        self.file = file_error
+        self.f = file_error
         self.synop_type = synop_type
         self.group_length = self.evaluate_length()
+        self.extract_indicators()
     
     def extract_indicators(self):
-        A = self.extract_indicator(0, 1)
-        B = self.extract_indicator(1, 2)
-        C = self.extract_indicator(2, 3)
-        DD = self.extract_indicator(3, 5)
-        return A, B, C, DD
+        self.A = self.extract_indicator(0, 1)
+        self.B = self.extract_indicator(1, 2)
+        self.C = self.extract_indicator(2, 3)
+        self.DD = self.extract_indicator(3, 5)
+
+	def evaluate_identifier(self, comparator, err_key):
+		if self.A.isdigit():
+			self.A = int(self.A)
+			if self.A == comparator:
+				self.group_id = True
+			else:
+				self.group_id = False
+		else:
+			print(self.errors[err_key])
+			self.f.write(self.errors[err_key] + '\n')
+			self.group_id = True
 
     def evaluate_group(self):
         pass
