@@ -74,13 +74,13 @@ def scraping_synops(url, log):
     statusCode = req.status_code
     fecha = fecha_para_registro()
     if statusCode == 200:
-        mensaje = "{}... Se accede correctamente a la página de Ogimet.com."
+        mensaje = "{}... Se accede correctamente a la página de Ogimet.com.".format(fecha)
         registro_de_actividad(mensaje, log)
         html = BeautifulSoup(req.text, "html.parser")
         entrada = html.find('pre')
         f.write(str(entrada))
     else:
-        mensaje = "{}... No se pudo acceder a la pádina de Ogimet.com."
+        mensaje = "{}... No se pudo acceder a la pádina de Ogimet.com.".format(fecha)
         registro_de_actividad(mensaje, log)
         #return ''
     f.close()
