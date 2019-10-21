@@ -39,3 +39,21 @@ class Group(object):
     
     def extract_indicator(self, init_index, end_index):
         return self.group[init_index:end_index]
+
+class Type_ABCDD(Group):
+    """
+    Class to define type ABCDD of groups.
+    """
+
+    def __init__(self, group, file_error='', synop_type='main'):
+        Group.__init__(self, group)
+        self.file = file_error
+        self.synop_type = synop_type
+    
+    def extract_indicators(self):
+        self.A = self.extract_indicator(0, 1)
+        self.B = self.extract_indicator(1, 2)
+        self.C = self.extract_indicator(2, 3)
+        self.DD = self.extract_indicator(3, 5)
+    
+
